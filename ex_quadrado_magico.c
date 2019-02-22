@@ -2,86 +2,79 @@
 #include <stdlib.h>
 
 int main() {
-    int lin, col, i, j, tamanho_matriz;
-    int soma_linha, soma_coluna;
-    int soma_diag1 = 0, soma_diag2 = 0;
-    int soma = 0, quadrado_magico = 1;
+    int i, j, soma_linha, soma_coluna, tamanho_matriz;
+    int soma_diagonal_1 = 0, soma_diagonal_2 = 0;
+    int soma_pivo = 0, quadrado_magico = 1;
 
-    printf("Digite o número de linhas da matriz: ");
-    scanf("%d", &lin);
-    printf("Digite o número de colunas da matriz: ");
-    scanf("%d", &col);
+    printf("Digite o tamanho da matriz: ");
+    scanf("%d", &tamanho_matriz);
 
-    if (lin != col) {
-        printf("A matriz precisa ser quadrada, tente novamente!");
-        exit(0);
-    }
-
-    int matriz[lin][col];
+    int matriz[tamanho_matriz][tamanho_matriz];
 
     // Alimenta matriz
-    for (i = 0; i < lin; i++) {
-        for (j = 0; j < col; j++) {
+    for (i = 0; i < tamanho_matriz; i++) {
+        for (j = 0; j < tamanho_matriz; j++) {
             printf("Digite os números: ");
             scanf("%d", &matriz[i][j]);
         }
     }
 
     // Soma linha 1 para pivô da soma
-    for (i = 0; i < lin; i++) {
-        soma += matriz[i][0];
+    for (i = 0; i < tamanho_matriz; i++) {
+        soma_pivo += matriz[i][0];
     }
 
     // Testa linhas
-    for (i=0; i < lin; i++) {
+    for (i=0; i < tamanho_matriz; i++) {
         soma_linha = 0;
-        for (j = 0; j < col; j++) {
-            soma_linha += matriz[0][j];
+        for (j = 0; j < tamanho_matriz; j++) {
+            soma_linha += matriz[i][j];
         }
-        if (soma_linha != soma) {
+        if (soma_linha != soma_pivo) {
             quadrado_magico = 0;
         }
     }
 
     // Testa colunas
-    for (i = 0; i < col; i++) {
+    for (i = 0; i < tamanho_matriz; i++) {
         soma_coluna = 0;
-        for (j = 0; j < col; j++) {
-            soma_coluna += matriz[i][0];
+        for (j = 0; j < tamanho_matriz; j++) {
+            soma_coluna += matriz[i][j];
         }
-        if (soma_coluna != soma) {
+        if (soma_coluna != soma_pivo) {
             quadrado_magico = 0;
         }
     }
 
     // Testa diagonal 1
-    for (i = 0; i < col; i++) {
-        soma_diag1 = 0;
-        for (j = 0; j < col; j++) {
+    for (i = 0; i < tamanho_matriz; i++) {
+        for (j = 0; j < tamanho_matriz; j++) {
             if (i == j) {
-                soma_diag1 += matriz[i][j];
+                soma_diagonal_1 += matriz[i][j];
             }
         }
-        if (soma_diag1 != soma) {
-            quadrado_magico = 0;
-        }
+    }
+    if (soma_diagonal_1 != soma_pivo) {
+        quadrado_magico = 0;
     }
 
     // Testa diagonal 2
-    for (i = 0; i < col; i++) {
-        soma_diag2 = 0;
-        for (j = col - 1; j > -1; j--) {
-            soma_diag2 += matriz[i][j];
+    for (i = 0; i < tamanho_matriz; i++) {
+        for (j = tamanho_matriz -1; j > -1; j--) {
+            if (i == j) {
+                soma_diagonal_2 += matriz[i][j];
+            }
         }
-        if (soma_diag1 != soma) {
-            quadrado_magico = 0;
-        }
+    }
+    if (soma_diagonal_2 != soma_pivo) {
+        printf("TESTA DIAGONAL2 - %d soma local - %d soma pivo\n", soma_diagonal_2, soma_pivo);
+        quadrado_magico = 0;
     }
 
     // Mostra matriz
-    for (i=0; i<lin; i++) {
-        for (j=0; j<col;j++) {
-        printf("%3.d\t",matriz[i][j]);
+    for (i = 0; i < tamanho_matriz; i++) {
+        for ( j = 0; j < tamanho_matriz; j++) {
+        printf("%3.d\t", matriz[i][j]);
         }
         printf("\n\n");
     }
