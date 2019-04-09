@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+
 typedef struct Stack {
     int ra;
     char name[30];
@@ -12,7 +13,7 @@ cell *newElement() {
     cell *new;
 
     new = (cell*)malloc(sizeof(cell));
-    if(new == NULL) {
+    if (new == NULL) {
         puts("Element could not be allocated");
     } else {
         puts("Type the R.A. code");
@@ -28,7 +29,7 @@ void insert(cell **top) {
     cell *new;
 
     new = newElement();
-    if(new == NULL) {
+    if (new == NULL) {
         puts("Element could not be allocated");
     } else {
         new->next = *top;
@@ -37,7 +38,7 @@ void insert(cell **top) {
 }
 
 void list(cell *top) {
-    if(top == NULL) {
+    if (top == NULL) {
         puts("Stack is empty");
     } else {
         do {
@@ -58,8 +59,8 @@ void destroy(cell **top) {
     }
 }
 
-void clear(cell **top) {
-    while(*top != NULL) {
+void clear_stack(cell **top) {
+    while (*top != NULL) {
         destroy(&*top);
     }
 }
@@ -83,7 +84,7 @@ int main() {
                 destroy(&top);
                 break;
             case 'C':
-                clear(&top);
+                clear_stack(&top);
                 break;
             case 'E':
                 exit(0);
@@ -91,6 +92,7 @@ int main() {
                 puts("Invalid option");
                 break;
         }
-    } while(op != 'E');
+    } while (op != 'E');
+
     return 0;
 }
