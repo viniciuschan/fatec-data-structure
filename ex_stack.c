@@ -25,48 +25,48 @@ cell *newElement() {
     return new;
 }
 
-void insert(cell **top) {
+void insert(cell **head) {
     cell *new;
 
     new = newElement();
     if (new == NULL) {
         puts("Element could not be allocated");
     } else {
-        new->next = *top;
-        *top = new;
+        new->next = *head;
+        *head = new;
     }
 }
 
-void list(cell *top) {
-    if (top == NULL) {
+void list(cell *head) {
+    if (head == NULL) {
         puts("Stack is empty");
     } else {
         do {
-            printf("\nName: %s \t RA: %d", top->name, top->ra);
-            top = top->next;
-        } while(top != NULL);
+            printf("\nName: %s \t RA: %d", head->name, head->ra);
+            head = head->next;
+        } while(head != NULL);
     }
 }
 
-void destroy(cell **top) {
+void destroy(cell **head) {
     cell *aux;
-    if (*top == NULL) {
+    if (*head == NULL) {
         puts("Stack is empty");
     } else {
-        aux = (*top)->next;
-        free(*top);
-        *top = aux;
+        aux = (*head)->next;
+        free(*head);
+        *head = aux;
     }
 }
 
-void clear_stack(cell **top) {
-    while (*top != NULL) {
-        destroy(&*top);
+void clear_stack(cell **head) {
+    while (*head != NULL) {
+        destroy(&*head);
     }
 }
 
 int main() {
-    cell *top = NULL;
+    cell *head = NULL;
     char op;
 
     do {
@@ -75,21 +75,21 @@ int main() {
         op = toupper(getchar());
         switch (op) {
             case 'I':
-                insert(&top);
+                insert(&head);
                 break;
             case 'L':
-                list(top);
+                list(head);
                 break;
             case 'D':
-                destroy(&top);
+                destroy(&head);
                 break;
             case 'C':
-                clear_stack(&top);
+                clear_stack(&head);
                 break;
             case 'E':
                 exit(0);
             default:
-                puts("Invalid option");
+                puts("Invalid option, to exit press 'E'");
                 break;
         }
     } while (op != 'E');
