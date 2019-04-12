@@ -67,9 +67,9 @@ void insert(cell **head, cell **tail) {
         puts("List is empty");
     }
     if ((*tail) == NULL) {
-        (*tail) = (*head) = NULL;
+        (*tail) = (*head) = new;
     } else {
-        printf("\n(1) Insert top,\n(2) Insert middle, \n(3) Insert last\n");
+        printf("\n(1) Insert top,\n(2) Insert last, \n(3) Insert middle\n");
         scanf("%d", &op);
 
         switch(op) {
@@ -84,7 +84,7 @@ void insert(cell **head, cell **tail) {
                 break;
             case 3:
                 list(*head);
-                puts("Choose the position to insert: ");
+                puts("Choose the name you want to insert in the next: ");
                 scanf("%s", name);
 
                 aux = (*head);
@@ -117,10 +117,11 @@ void list(cell *head) {
         
         puts("\n----- HEAD -----");
         while (aux != NULL) {
-            printf("%s", aux->name);
+            printf("\n%s\n", aux->name);
             aux = aux->next;
         }
         puts("----- TAIL -----\n");
+
     }
 }
 
@@ -166,6 +167,10 @@ void destroy(cell **head, cell **tail) {
 
 void clear_list(cell **head, cell **tail) {
     cell *aux = NULL;
+
+    if (*head == NULL) {
+        puts("Empty list!");
+    }
 
     while((*head) != NULL) {
         aux = (*head);
