@@ -1,3 +1,3 @@
-# fatec-estrutura-dados
+# fatec-data-structure
 
-Repositório de exercícios realizados na disciplina de Estrutura de dados
+Repository of exercises performed in the Data Structure discipline
